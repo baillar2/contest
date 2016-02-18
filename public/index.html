@@ -6,16 +6,18 @@
 	<script type="text/javascript" src='/main.js'></script>
 </head>
 <body ng-controller='controllerOne'>
-	<marquee><h1>Tom's Sexy Sailor Video Contest!!!!!!!!!!!</h1></marquee>
-	<marquee><h1>So sexy!!!</h1></marquee>
-	<marquee><h1>So many Sailors!!!</h1></marquee>
+	<marquee direction='left' scrollamount='10'><h1>Tom's Sexy Sailor Video Contest!!!!!!!!!!!</h1></marquee>
+	<marquee direction='right' scrollamount='15'><h1>So sexy!!!</h1></marquee>
+	<marquee direction='left' scrollamount='15'><h1>So many Sailors!!!</h1></marquee>
 	<div>
 		<h3>Check out these Sailors</h3>
 		<div ng-repeat='video in list'>
-			<div ng-bind-html='video.url'></div>
 			<h4>{{video.title}}</h4>
+			<iframe width="560" height="315" src="{{$sce.trustAsResourceUrl(video.url)}}" frameborder="0" allowfullscreen></iframe>
 			<h5>{{video.description}}</h5>
 			<h5>{{video.name}}</h5>
+			<h5>{{video.rating}}</h5>
+			<button ng-click='liked(video)'>Like Me!!</button>
 		</div>
 
 	</div>
