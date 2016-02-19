@@ -2,6 +2,9 @@
 <html ng-app='moduleOne'>
 <head>
 	<title>Contest Page</title>
+	<script type="text/javascript" src"https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css">
+	<script type="text/javascript" src"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
 	<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.js'></script>
 	<script type="text/javascript" src='/main.js'></script>
 </head>
@@ -9,30 +12,34 @@
 	<marquee direction='left' scrollamount='10'><h1>Tom's Sexy Sailor Video Contest!!!!!!!!!!!</h1></marquee>
 	<marquee direction='right' scrollamount='15'><h1>So sexy!!!</h1></marquee>
 	<marquee direction='left' scrollamount='15'><h1>So many Sailors!!!</h1></marquee>
-	<div>
-		<h3>Check out these Sailors</h3>
-		<div ng-repeat='video in list'>
-			<h4>{{video.title}}</h4>
-			<iframe width="560" height="315" src="{{::$sce.trustAsResourceUrl(video.url)}}" frameborder="0" allowfullscreen></iframe>
-			<h5>{{video.description}}</h5>
-			<h5>{{video.name}}</h5>
-			<h5>{{video.rating}}</h5>
-			<button ng-click='liked(video.name)'>Like Me!!</button>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2">	
+				<form ng-submit='newVideo()'>
+					<input ng-model='sub.name' placeholder="Name"></input>
+					<input ng-model='sub.url' placeholder="Embeded url"></input>
+					<input ng-model='sub.title' placeholder="Title"></input>
+					<input ng-model='sub.description' placeholder="Description"></input>
+					<input type="submit"></input>			
+				</form>
+				<h3>Check out these Sailors</h3>
+			</div>	
+		</div>	
+		<div class="row">			
+			<div class="col-xs-6" ng-repeat='video in list | limitTo:2:displayNumber'>
+				<h4>{{video.title}}</h4>
+				<iframe width="300" height="300" src="{{::$sce.trustAsResourceUrl(video.url)}}" frameborder="0" allowfullscreen></iframe>
+				<h5>{{video.description}}</h5>
+				<h5>{{video.name}}</h5>
+				<h5>{{video.rating}}</h5>
+				<button ng-click='liked(video.name)'>Like Me!!</button>
+			</div>	
 		</div>
-
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-3">
+				<button ng-click='decrease()'>Previous</button> <button ng-click='increase()'>Next</button>	
+			</div>		
+		</div>
 	</div>
-
-
-
-
-	<div>
-		<form ng-submit='newVideo()'>
-			<input ng-model='sub.name' placeholder="Name"></input>
-			<input ng-model='sub.url' placeholder="Embeded url"></input>
-			<input ng-model='sub.title' placeholder="Title"></input>
-			<input ng-model='sub.description' placeholder="Description"></input>
-			<input type="submit"></input>
-		</form>
-	</div>	
 </body>
 </html>
