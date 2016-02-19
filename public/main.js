@@ -17,8 +17,17 @@ angular.module('moduleOne')
 				 })				 
 		}
 
-		$scope.liked = function(){
-
-			$http.post('/api/rate')
+		$scope.liked = function(vidName, $index){
+			$http.post('/api/rate',{name: vidName})
+				 .then(function(serverData){
+				 	console.log(serverData)
+				 	$scope.list.forEach(function(video){
+				 		if(video.name == serverData.data.name){
+				 			video.rating = serverData.data.num
+				 			
+				 		}
+				 	})
+				 	
+				 })
 		}
 	}])

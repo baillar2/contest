@@ -17,7 +17,7 @@ var listItem = function(obj){
 		this.url = obj.url, 
 		this.title = obj.title, 
 		this.description = obj.description, 
-		this.rating = obj.rating
+		this.rating = obj.rating || 0
 }
 
 var list = [
@@ -49,6 +49,27 @@ app.post('/api/list', function(req, res){
 		res.send('Too Many Videos Brah!!!!!!!')
 	}
 })
+app.post('/api/rate', function(req, res){
+		var num = null
+		var name = null
+		list.forEach(function(video){
+			if(video.name == req.body.name){
+				video.rating += 1
+				num = video.rating		
+				name = video.name
+			}	
+		})
+		res.send({
+			num : num,
+			name: name
+		})		
+	//include some info with in req.body about the index, loop through videos in list
+	// to match included data with index, if req.body === list[i].name{list[i].rating =+1}
+	//res.send(list)
+})
+
+
+
 // Creating Server and Listening for Connections \\
 var port = 3000
 app.listen(port, function(){

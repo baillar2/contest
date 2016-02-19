@@ -13,11 +13,11 @@
 		<h3>Check out these Sailors</h3>
 		<div ng-repeat='video in list'>
 			<h4>{{video.title}}</h4>
-			<iframe width="560" height="315" src="{{$sce.trustAsResourceUrl(video.url)}}" frameborder="0" allowfullscreen></iframe>
+			<iframe width="560" height="315" src="{{::$sce.trustAsResourceUrl(video.url)}}" frameborder="0" allowfullscreen></iframe>
 			<h5>{{video.description}}</h5>
 			<h5>{{video.name}}</h5>
 			<h5>{{video.rating}}</h5>
-			<button ng-click='liked(video)'>Like Me!!</button>
+			<button ng-click='liked(video.name)'>Like Me!!</button>
 		</div>
 
 	</div>
